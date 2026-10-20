@@ -1,0 +1,20 @@
+DEMO: Sentiment Classification API
+==================================
+
+1) Health endpoint
+$ curl http://localhost:8000/health
+{"status":"ok","model_loaded":true,"device":"cpu"}
+
+2) Inference endpoint
+$ curl -X POST "http://localhost:8000/predict" \
+    -H "Content-Type: application/json" \
+    -d '{"text":"The product is excellent and works perfectly."}'
+{"text":"The product is excellent and works perfectly.","predicted_sentiment":"positive","positive_probability":0.9596,"negative_probability":0.0404,"threshold":0.5}
+
+3) Second example
+$ curl -X POST "http://localhost:8000/predict" \
+    -H "Content-Type: application/json" \
+    -d '{"text":"This was disappointing and stopped working after one day."}'
+{"text":"This was disappointing and stopped working after one day.","predicted_sentiment":"negative","positive_probability":0.0764,"negative_probability":0.9236,"threshold":0.5}
+
+These outputs were checked against the local FastAPI service and the saved model artifacts.
